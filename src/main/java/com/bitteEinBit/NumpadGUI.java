@@ -98,6 +98,9 @@ public class NumpadGUI extends Application {
             handleProductClick(id);
         });
 
+        stackPane.setOnMousePressed(event -> stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: lightgrey;"));
+        stackPane.setOnMouseReleased(event -> stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: white;"));
+
         return stackPane;
     }
 
@@ -119,6 +122,17 @@ public class NumpadGUI extends Application {
 
         stackPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             handleBasicFunctionClick(label, stage);
+        });
+
+        stackPane.setOnMousePressed(event -> stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: lightgrey;"));
+        stackPane.setOnMouseReleased(event -> {
+            if (color.equals("red")) {
+                stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: red;");
+            } else if (color.equals("orange")) {
+                stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: rgb(255, 188, 0);");
+            } else {
+                stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: white;");
+            }
         });
 
         return stackPane;
@@ -221,6 +235,8 @@ public class NumpadGUI extends Application {
         textGrid.setVgap(40); // Increase vertical gap between lines
         textGrid.add(totalText, 0, 0);
         textGrid.add(paidText, 0, 1);
+        textGrid.add(changeText, 0, 2);
+
         textGrid.add(changeText, 0, 2);
 
         summaryPane.getChildren().add(textGrid);

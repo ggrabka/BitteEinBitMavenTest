@@ -135,6 +135,9 @@ public class KassaGUI extends Application {
             handleProductClick(id, product, price);
         });
 
+        stackPane.setOnMousePressed(event -> stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: lightgrey;"));
+        stackPane.setOnMouseReleased(event -> stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: white;"));
+
         return stackPane;
     }
 
@@ -159,6 +162,17 @@ public class KassaGUI extends Application {
 
         stackPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             handleBasicFunctionClick(label);
+        });
+
+        stackPane.setOnMousePressed(event -> stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: lightgrey;"));
+        stackPane.setOnMouseReleased(event -> {
+            if (counter == 4 || counter == 5) {
+                stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: red;");
+            } else if (counter == 10 || counter == 11 || counter == 16 || counter == 17) {
+                stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: rgb(255, 188, 0);");
+            } else {
+                stackPane.setStyle("-fx-border-color: black; -fx-border-width: 5px; -fx-background-color: white;");
+            }
         });
 
         return stackPane;
