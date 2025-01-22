@@ -1,5 +1,7 @@
 package com.bitteEinBit;
 
+import javafx.application.Application;
+
 public class Main {
 
     public static Product[] products = new Product[] {
@@ -22,6 +24,8 @@ public class Main {
     };
 
     public static void main(String[] args) {
+
+        Application.launch(KassaGUI.class, args);
 
         CashRegisterScreen cashRegisterScreen = new CashRegisterScreen();
         cashRegisterScreen.startForCustomer();
