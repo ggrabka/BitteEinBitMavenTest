@@ -1,0 +1,121 @@
+[
+  {
+    "transactionId": 1,
+    "purchasedProducts": [
+      {
+        "productId": 1,
+        "name": "Coffee",
+        "productGroup": "Getränke",
+        "price": 5.5,
+        "quantity": 1
+      },
+      {
+        "productId": 8,
+        "name": "Buttercroisant",
+        "productGroup": "Gebäck",
+        "price": 1.0,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 6.5,
+    "transactionTime": "2025-01-22T12:25:18.4226893"
+  },
+  {
+    "transactionId": 2,
+    "purchasedProducts": [
+      {
+        "productId": 1,
+        "name": "Coffee",
+        "productGroup": "Getränke",
+        "price": 5.5,
+        "quantity": 1
+      },
+      {
+        "productId": 3,
+        "name": "Kipferl",
+        "productGroup": "Gebäck",
+        "price": 1.2,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 6.7,
+    "transactionTime": "2025-01-22T12:42:12.6081488"
+  },
+  {
+    "transactionId": 3,
+    "purchasedProducts": [
+      {
+        "productId": 7,
+        "name": "Proteinweckerl",
+        "productGroup": "Gebäck",
+        "price": 1.0,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 1.0,
+    "transactionTime": "2025-01-22T12:49:21.948259"
+  },
+  {
+    "transactionId": 4,
+    "purchasedProducts": [
+      {
+        "productId": 9,
+        "name": "Weißbrot",
+        "productGroup": "Gebäck",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "productId": 4,
+        "name": "Salzstangerl",
+        "productGroup": "Gebäck",
+        "price": 1.2,
+        "quantity": 3
+      }
+    ],
+    "totalAmount": 6.6,
+    "transactionTime": "2025-01-22T13:18:38.1034176"
+  },
+  {
+    "transactionId": 5,
+    "purchasedProducts": [
+      {
+        "productId": 6,
+        "name": "Fanta",
+        "productGroup": "Getränke",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "productId": 5,
+        "name": "Cola",
+        "productGroup": "Getrönk",
+        "price": 3.0,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 6.0,
+    "transactionTime": "2025-01-22T13:27:54.8624997"
+  },
+  {
+    "transactionId": 6,
+    "purchasedProducts": [
+      {
+        "productId": 5,
+        "name": "Caesar-Salat",
+        "productGroup": "Salat",
+        "price": 6.5,
+        "quantity": 1
+      },
+      {
+        "productId": 3,
+        "name": "Tomatensuppe",
+        "productGroup": "Suppe",
+        "price": 4.5,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 11.0,
+    "transactionTime": "2025-01-22T13:37:00.403372"
+  }
+]

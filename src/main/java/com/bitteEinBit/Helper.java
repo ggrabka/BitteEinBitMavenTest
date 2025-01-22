@@ -10,108 +10,72 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-
+/**
+ * Die `Helper`-Klasse ist für das Laden und Speichern von Produkten in einer JSON-Datei verantwortlich.
+ */
 public class Helper {
+    private static final String PRODUCTS_JSON = "products.json"; // Speicherort der Produktdaten
+    private List<Product> products = new ArrayList<>(); // Liste der geladenen Produkte
+    private final Gson gson = new Gson(); // JSON-Konverter für die Umwandlung zwischen Java-Objekten und JSON
 
-    private boolean isOverwritten;
-    int counter = 0;
-    private static final String PRODUCTS_JSON = "products.json";
-
-    List<Product> products = new ArrayList<>();
-    Gson gson = new Gson();
-
-    void readFromJsonFile() {
-        try {
-            FileReader reader = new FileReader(PRODUCTS_JSON);
+    /**
+     * Liest die gespeicherten Produkte aus der JSON-Datei und speichert sie in der `products`-Liste.
+     * Falls die Datei nicht exisstiert oder leer ist, wird eine leere Liste verwendet.
+     */
+    public void readFromJsonFile() {
+        try (FileReader reader = new FileReader(PRODUCTS_JSON)) {
             Type type = new TypeToken<ArrayList<Product>>() {}.getType();
-            products = gson.fromJson(reader, type);
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("Error in creating a FileReader object.");
-        } catch (IOException e) {
-            System.err.println("Error in closing the file.");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    List<Product> createProductList() {
-        try {
-            FileReader reader = new FileReader(PRODUCTS_JSON);
-            Type type = new TypeToken<ArrayList<Product>>() {}.getType();
-            products = gson.fromJson(reader, type);
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("Error in creating a FileReader object.");
-        } catch (IOException e) {
-            System.err.println("Error in closing the file.");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return products;
-    }
-
-    void checkIfProductExistsInJsonFile(Product product) {
-        Scanner scanner = new Scanner(System.in);
-        for (Product currentProduct : products) {
-            if (currentProduct.getName().equals(product.getName())) {
-                System.out.println("Product with the same name already exist. Do you wish to overwrite to the product? y/n");
-                String input = scanner.next();
-                while(!input.equals("y") && !input.equals("n")) {
-                    System.out.println("Wrong input, please enter y or n");
-                    input = scanner.next();
-                }
-                if(input.equals("y")) {
-                    currentProduct.setName(product.getName());
-                    currentProduct.setPrice(product.getPrice());
-                    currentProduct.setProductGroup(product.getProductGroup());
-                    isOverwritten = true;
-                    break;
-                } else {
-                    return;
-                }
+            List<Product> loadedProducts = gson.fromJson(reader, type);
+            if (loadedProducts != null) {
+                products = loadedProducts;
             }
-            counter++;
+        } catch (FileNotFoundException e) {
+            System.out.println("Noch keine Produkte gespeichert.");
+        } catch (IOException e) {
+            System.err.println("Fehler beim Lesen der Produktdatei.");
         }
     }
 
-    void addProductToJsonFile(Product product) {
-        int productId = products.size();
-        for(Product currentProduct : products) {
-            if(currentProduct.getProductId()>=products.size()) {
-                productId++;
-            }
-        }
-        product.setProductId(productId);
-        if(!isOverwritten && counter == products.size()) {
-            products.add(product);
-        }
+    /**
+     * Gibt eine Kopie der aktuellen Produktliste zurück, um Manipulationen zu verhindern.
+     * @return Eine Liste der gespeicherten Produkte.
+     */
+    public List<Product> getProducts() {
+        return new ArrayList<>(products);
+    }
+
+    /**
+     * Fügt ein neues Produkt hinzu oder aktualisiert ein vorhandenes Produkt anhand der ID.
+     * @param product Das hinzuzufügende oder zu aktualisierende Produkt.
+     */
+    public void addOrUpdateProduct(Product product) {
+        products.removeIf(p -> p.getProductId() == product.getProductId()); // Entfernt das Produkt, falls es bereits existiert
+        products.add(product);
         writeToJsonFile();
     }
 
-    void removeProductFromJsonFile(Product product) {
-        for (Product currentProduct : products) {
-            if (currentProduct.getName().equals(product.getName())) {
-                products.remove(product);
-                System.out.println("Product removed successfully.");
-                break;
-            }
+    /**
+     * Entfernt ein Produkt aus der JSON-Datei anhand der ID.
+     * @param product Das zu entfernende Produkt.
+     */
+    public void removeProduct(Product product) {
+        if (products.removeIf(p -> p.getProductId() == product.getProductId())) {
+            writeToJsonFile();
+            System.out.println("Produkt erfolgreich entfernt.");
+        } else {
+            System.out.println("Kein Produkt gefunden.");
         }
-        if((!isOverwritten)) {
-            System.out.println("No product found with the provided parameters!");
-        }
-        writeToJsonFile();
     }
 
-    void writeToJsonFile() {
-        try {
-            FileWriter writer = new FileWriter(PRODUCTS_JSON);
-            gson.toJson(products,writer);
-            writer.close();
+    /**
+     * Speichert die aktuelle Produktliste in die JSON-Datei.
+     */
+    private void writeToJsonFile() {
+        try (FileWriter writer = new FileWriter(PRODUCTS_JSON)) {
+            gson.toJson(products, writer);
         } catch (IOException e) {
-            System.err.println("Error in writing the file.");
+            System.err.println("Fehler beim Schreiben der Produktdatei.");
         }
     }
 }

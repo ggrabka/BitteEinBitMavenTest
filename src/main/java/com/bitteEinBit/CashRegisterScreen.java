@@ -1,435 +1,88 @@
 package com.bitteEinBit;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Die `CashRegissterScreen`-Klasse stellt die Benutzeroberfläche für die Registrierkasse bereit.
+ * Hier können Kunden Produkte zum Warenkorb hinzufügen, entfernen und den Bezahlvorgang durchführen.
+ */
 public class CashRegisterScreen {
+    private int nextCartId = 1; // Variable zur Generierung eindeutiger Warenkorb-IDs
+    private Cart cart = new Cart(0); // Der aktuelle Warenkorb des Kunden
+    private final Scanner scanner = new Scanner(System.in); // Scanner für Benutzereingaben
+    private final TransactionManager transactionManager = new TransactionManager(); // Verwalter für Transaktionen
 
-    Scanner button = new Scanner(System.in);
-    Helper helper = new Helper();
-    List<Product> productList = helper.createProductList();
-
-    private int nextCartId = 1;
-    private Cart cart = new Cart(0);
-    private final ArrayList<Cart> completedCarts;
-
-    Product products = new Product(productList);
-    Product product = null;
-
-    public CashRegisterScreen() {
-
-        this.completedCarts = new ArrayList<>();
-    }
-
+    /**
+     * Erstellt einen neuen Warenkorb mit einer eindeutigen ID.
+     * @return Der neue Warenkorb.
+     */
     public Cart createNewCart() {
-
         return new Cart(nextCartId++);
     }
 
-    public void displayCashRegisterScreenTop() {
-
-        System.out.println("\n\n\n");
-        System.out.println("  ========================= ");
-        System.out.println("       REGISTRIERKASSE      ");
-        System.out.println("  ========================= ");
-    }
-
-    public void displayCashRegisterScreenBottom() {
-
-        System.out.println("  ------------------------- ");
-        cart.printMyList();
-        System.out.println("  ========================= ");
-        System.out.printf("        BETRAG: %.2f €\n", cart.getTotal());
-        System.out.println("  ------------------------- ");
-        System.out.println(
-                        "  |   1   2   3   |   #   | \n" +
-                        "  |   4   5   6   |   +   | \n" +
-                        "  |   7   8   9   |   -   | \n" +
-                        "  |   C   0   OK  |   #   | \n" +
-                        "  |   ,           |   #   | \n" +
-                        "  ------------------------- \n" +
-                        "    MENU  |    BEZAHLEN            \n" +
-                        "  ------------------------- \n" +
-                        "    EXIT  |    LÖSCHEN      \n" +
-                        "  ------------------------- ");
-    }
-
-    public void caseAdd() {
-
-        if (product == null) {
-
-            System.out.println(" Sie haben noch kein Produkt ausgewählt");
-        } else {
-
-            cart.addProduct(product);
-
-            System.out.println(" In Ihrem Warenkorb haben Sie " + product.getQuantity() +
-                    " Stück von " + product.getName());
-        }
-    }
-
-    public void caseRemove() {
-
-        if (product == null) {
-
-            System.out.println(" Sie haben noch kein Produkt ausgewählt");
-        } else {
-
-            if (product.getQuantity() == 0) {
-
-                System.out.println(" Dieses Produkt (" + product.getName() +
-                        ") befindet sich nicht in Ihrem Warenkorb");
-            } else {
-
-                cart.removeProduct(product);
-
-                System.out.println(" Im Warenkorb haben Sie " + product.getQuantity() + " Stück von " + product.getName());
-            }
-        }
-    }
-
-    public void caseClear() {
-
-        if (cart.getMyProducts().isEmpty()) {
-
-            displayCashRegisterScreenTop();
-            System.out.println(" Ihr Warenkorb ist noch leer");
-            displayCashRegisterScreenBottom();
-        } else {
-
-            char clear;
-
-            displayCashRegisterScreenTop();
-            System.out.println(" Möchten Sie alle Produkte aus Ihrem Warenkorb entfernen?\n" +
-                    " C : Zurück || O : Weiter ");
-            displayCashRegisterScreenBottom();
-
-            do {
-                clear = button.next().charAt(0);
-            } while (clear != 'O' && clear != 'o' && clear != 'C' && clear != 'c');
-
-            displayCashRegisterScreenTop();
-            if (clear == 'O' || clear == 'o') {
-
-                cart.clearList();
-            }
-            displayCashRegisterScreenBottom();
-        }
-    }
-
-    public boolean casePay() {
-
-        if (cart.getMyProducts().isEmpty()) {
-
-            displayCashRegisterScreenTop();
-            System.out.println(" Sie haben noch nichts zu bezahlen");
-            displayCashRegisterScreenBottom();
-        } else {
-
-            char pay;
-
-            displayCashRegisterScreenTop();
-            System.out.println(" Möchten Sie den Betrag bezahlen?\n" +
-                    " C : Zurück || O : Weiter ");
-            displayCashRegisterScreenBottom();
-
-            do {
-                pay = button.next().charAt(0);
-            } while (pay != 'O' && pay != 'o' && pay != 'C' && pay != 'c');
-
-            if (pay == 'O' || pay == 'o') {
-
-                boolean isPaid = false;
-                char choice;
-                String choiceString = "";
-                double receivedAmount, changeToReturn, fullAmountReceived = 0.0;
-                double total = cart.getTotal();
-
-                displayCashRegisterScreenTop();
-                displayCashRegisterScreenBottom();
-
-                System.out.println(" // Der Bezahlvorgang beginnt...");
-                System.out.println(" // Bitte geben Sie den Betrag ein...");
-
-                while(!isPaid) {
-
-                    choice = button.next().charAt(0);
-
-                    while(choice == ',' && choiceString.isEmpty()) {
-                        System.out.println("Bitte einen Betrag vor dem Komma eingeben");
-                        choice = button.next().charAt(0);
-                    }
-
-                    if ((choice >= '0' && choice <= '9') || choice == ',') {
-                        if(choice == ',') {
-                            choice = '.';
-                        }
-                        choiceString += choice;
-
-                        displayCashRegisterScreenTop();
-                        System.out.println(choiceString);
-                        displayCashRegisterScreenBottom();
-                    }
-
-                    if (!choiceString.isEmpty() && (choice == 'o' || choice == 'O')) {
-
-                        receivedAmount = Double.parseDouble(choiceString);
-                        fullAmountReceived += receivedAmount;
-                        changeToReturn = receivedAmount - total;
-
-                        if (receivedAmount >= total) {
-
-                            displayCashRegisterScreenTop();
-                            System.out.printf(" Gesamtbetrag: %.2f €\n Erhalten: %.2f €\n Rückgeld: %.2f €\n\n " +
-                                    " Vielen Dank! Auf Wiedersehen!\n", cart.getTotal(), fullAmountReceived, changeToReturn);
-                            displayCashRegisterScreenBottom();
-
-                            isPaid = true;
-
-                        } else {
-
-                            changeToReturn *= (-1);
-
-                            displayCashRegisterScreenTop();
-                            System.out.printf(" Sie müssen noch %.2f € bezahlen", changeToReturn);
-                            displayCashRegisterScreenBottom();
-
-                            total = changeToReturn;
-                            choiceString = "";
-
-                        }
-                    } else if (!choiceString.isEmpty() && (choice == 'c' || choice == 'C')) {
-
-                        displayCashRegisterScreenTop();
-                        choiceString = "";
-                        displayCashRegisterScreenBottom();
-                    }
-                }
-
-                completedCarts.add(cart);
-                startForCustomer();
-
-                return false;
-
-            } else {
-
-                displayCashRegisterScreenTop();
-                displayCashRegisterScreenBottom();
-            }
-        }
-
-        return true;
-    }
-
-    public boolean caseExit() {
-
-        char exit;
-
-        displayCashRegisterScreenTop();
-        System.out.println(" Möchten Sie den Bestellvorgang beenden?\n" +
-                " C : Zurück || O : Weiter ");
-        displayCashRegisterScreenBottom();
-
-        do {
-            exit = button.next().charAt(0);
-        } while (exit != 'O' && exit != 'o' && exit != 'C' && exit != 'c');
-
-        if (exit == 'O' || exit == 'o') {
-
-            if (cart.getMyProducts().isEmpty()) {
-
-                displayCashRegisterScreenTop();
-                System.out.println(" // Ihr Bestellvorgang wird beendet...\n" +
-                        " // AUF WIEDERSEHEN!");
-                displayCashRegisterScreenBottom();
-
-                completedCarts.add(cart);
-                startForCustomer();
-
-                return false;
-
-            } else {
-
-                casePay();
-            }
-
-        } else {
-
-            displayCashRegisterScreenTop();
-            displayCashRegisterScreenBottom();
-        }
-
-        return true;
-    }
-
-    public Product findProductById(int id) {
-
-        for (Product product : productList) {
-
-            if (product.getProductId() == id) {
-
-                return product;
-            }
-        }
-
-        return null;
-    }
-
-    public boolean checkId(int number) {
-
-        for (Product product : productList) {
-
-            if (product.getProductId() == number) {
-
-                return true;
-            }
-        }
-
-        displayCashRegisterScreenTop();
-        System.out.println(" Kein Produkt mit dieser ID gefunden.");
-        displayCashRegisterScreenBottom();
-
-        return false;
-    }
-
-    public void run() {
-
-        boolean inSystem = true;
-
-        displayCashRegisterScreenTop();
-        displayCashRegisterScreenBottom();
-
-        char choice;
-        String choiceString = "";
-        int number;
-
-        while(inSystem) {
-
-            choice = button.next().charAt(0);
-
-            if (choice >= '0' && choice <= '9') {
-
-                choiceString += choice;
-
-                displayCashRegisterScreenTop();
-                System.out.println(choiceString);
-                displayCashRegisterScreenBottom();
-            }
-
-            if (!choiceString.isEmpty() && (choice == 'o' || choice == 'O')) {
-
-                number = Integer.parseInt(choiceString);
-                choiceString = "";
-
-                boolean idExists = checkId(number);
-
-                if (idExists) {
-
-                    product = findProductById(number);
-
-                    displayCashRegisterScreenTop();
-                    product.printProduct();
-                    displayCashRegisterScreenBottom();
-                }
-            }
-            else if (!choiceString.isEmpty() && (choice == 'c' || choice == 'C')) {
-
-                displayCashRegisterScreenTop();
-                choiceString = "";
-                displayCashRegisterScreenBottom();
-            } else {
-
-                switch (choice) {
-
-                    case '*':
-                    case '+':
-                        displayCashRegisterScreenTop();
-                        caseAdd();
-                        displayCashRegisterScreenBottom();
-                        break;
-
-                    case '_':
-                    case '-':
-                        displayCashRegisterScreenTop();
-                        caseRemove();
-                        displayCashRegisterScreenBottom();
-                        break;
-
-                    case 'b':
-                    case 'B':
-                        inSystem = casePay();
-                        break;
-
-                    case 'e':
-                    case 'E':
-                        inSystem = caseExit();
-                        break;
-
-                    case 'l':
-                    case 'L':
-                        caseClear();
-                        break;
-
-                    case '\'':
-                    case '#':
-                        displayCashRegisterScreenTop();
-                        cart.printMyList();
-                        displayCashRegisterScreenBottom();
-                        break;
-
-                    case 'm':
-                    case 'M':
-                        displayCashRegisterScreenTop();
-                        products.displayProducts();
-                        displayCashRegisterScreenBottom();
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-    public void printTransactions() {
-
-        System.out.println(" -- Zusammenfassung der Transaktionen -- \n");
-
-        double totalRevenue = 0.0;
-
-        for (Cart cart : completedCarts) {
-
-            totalRevenue += cart.getTotal();
-            cart.printCustomersCart();
-        }
-
-        System.out.println();
-        System.out.printf(" Gesamteinnahmen: %.2f €\n", totalRevenue);
-    }
-
+    /**
+     * Startet die Benutzeroberfläche für die Kasse.
+     * Der Kunde kann Produkte hinzufügen, entfernen und bezahlen.
+     */
     public void startForCustomer() {
+        cart = createNewCart(); // Erzeugt einen neuen Warenkorb für den Kunden
+        System.out.println("Neuer Warenkorb erstellt! ID: " + cart.getId());
 
-        {
-            product = null;
-            cart = createNewCart();
+        boolean running = true;
+        while (running) {
+            // Zeigt das Hauptmenü der Kasse an
+            System.out.println("\n1: Produkt hinzufügen | 2: Produkt entfernen | 3: Warenkorb anzeigen | 4: Bezahlen | 5: Kassasturz | 6: Beenden");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Verhindert Scanner-Fehlverhalten
+
+            switch (choice) {
+                case 1 -> addProduct(); // Produkt hinzufügen
+                case 2 -> removeProduct(); // Produkt entfernen
+                case 3 -> cart.printCart(); // Warenkorb anzeigen
+                case 4 -> handlePayment(); // Bezahlvorgang starten
+                case 5 -> transactionManager.endOfDayReport(); // Tagesabschlussbericht anzeigen
+                case 6 -> {
+                    System.out.println("Registrierkasse beendet.");
+                    running = false; // Schleife beenden, um das Programm zu stoppen
+                }
+            }
         }
+    }
 
-        displayCashRegisterScreenTop();
-        System.out.println(" Möchten Sie den Screen benutzen?\n" +
-                " C : Zurück || O : Weiter ");
-        displayCashRegisterScreenBottom();
+    /**
+     * Ruft die Produktliste auf und erlaubt dem Kunden, ein Produkt zum Warenkorb hinzuzufügen.
+     */
+    private void addProduct() {
+        Display display = new Display();
+        display.displayProducts(); // Zeigt verfügbare Produkte an
+        System.out.print("Produkt-ID: ");
+        Product product = display.selectProduct(); // Wählt ein Produkt basierend auf der ID aus
+        cart.addProduct(product); // Fügt das ausgewählte Produkt zum Warenkorb hinzu
+    }
 
-        char start;
+    /**
+     * Ruft die Produktliste auf und erlaubt dem Kunden, ein Produkt aus dem Warenkorb zu entfernen.
+     */
+    private void removeProduct() {
+        Display display = new Display();
+        display.displayProducts(); // Zeigt verfügbare Produkte an
+        System.out.print("Produkt-ID: ");
+        Product product = display.selectProduct(); // Wählt ein Produkt basierend auf der ID aus
+        cart.removeProduct(product); // Entfernt das Produkt aus dem Warenkorb
+    }
 
-        do {
-            start = button.next().charAt(0);
-        } while (start != 'O' && start != 'o' && start != 'C' && start != 'c');
-
-        if (start == 'O' || start == 'o') {
-
-            System.out.println(" Neuer Warenkorb erstellt! ID: " + cart.getId());
-
-            run();
-        }
+    /**
+     * Führt den Bezahlvorgang für den aktuellen Warenkorb durch.
+     * Der Kunde gibt den gezahlten Betrag ein, und das Wechselgeld wird berechnet.
+     * Anschließend wird die Transaktion gespeichert und der Warenkorb geleert.
+     */
+    private void handlePayment() {
+        double totalAmount = cart.getTotal();
+        System.out.printf("\nGesamtbetrag: %.2f €\n", totalAmount);
+        System.out.print("Gezahlter Betrag: ");
+        double receivedAmount = scanner.nextDouble(); // Eingabe des gezahlten Betrags durch den Kunden
+        System.out.printf("Wechselgeld: %.2f €\n", receivedAmount - totalAmount); // Berechnung des Wechselgelds
+        transactionManager.saveTransaction(cart); // Speichert die Transaktion in der JSON-Datei
+        cart.clearList(); // Leert den Warenkorb nach der Zahlung
     }
 }
