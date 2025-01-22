@@ -3,11 +3,11 @@ package com.bitteEinBit;
 import java.util.Scanner;
 
 /**
- * Die `CashRegissterScreen`-Klasse stellt die Benutzeroberfläche für die Registrierkasse bereit.
+ * Die `CashRegisterScreen`-Klasse stellt die Benutzeroberfläche für die Registrierkasse bereit.
  * Hier können Kunden Produkte zum Warenkorb hinzufügen, entfernen und den Bezahlvorgang durchführen.
  */
 public class CashRegisterScreen {
-    private int nextCartId = 1; // Variable zur Generierung eindeutiger Warenkorb-IDs
+    private int nextCartId = 1; // Zähler für die Warenkorb-IDs
     private Cart cart = new Cart(0); // Der aktuelle Warenkorb des Kunden
     private final Scanner scanner = new Scanner(System.in); // Scanner für Benutzereingaben
     private final TransactionManager transactionManager = new TransactionManager(); // Verwalter für Transaktionen
@@ -30,10 +30,9 @@ public class CashRegisterScreen {
 
         boolean running = true;
         while (running) {
-            // Zeigt das Hauptmenü der Kasse an
             System.out.println("\n1: Produkt hinzufügen | 2: Produkt entfernen | 3: Warenkorb anzeigen | 4: Bezahlen | 5: Kassasturz | 6: Beenden");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Verhindert Scanner-Fehlverhalten
+
+            int choice = getUserChoice(1, 6); // 🔥 Verbesserte Methode zur Eingabevalidierung
 
             switch (choice) {
                 case 1 -> addProduct(); // Produkt hinzufügen
@@ -43,46 +42,70 @@ public class CashRegisterScreen {
                 case 5 -> transactionManager.endOfDayReport(); // Tagesabschlussbericht anzeigen
                 case 6 -> {
                     System.out.println("Registrierkasse beendet.");
-                    running = false; // Schleife beenden, um das Programm zu stoppen
+                    running = false; // Beendet die Schleife und somit das Programm
                 }
             }
         }
     }
 
     /**
-     * Ruft die Produktliste auf und erlaubt dem Kunden, ein Produkt zum Warenkorb hinzuzufügen.
+     * Fordert den Benutzer auf, eine gültige Zahl in einem bestimmten Bereich einzugeben.
+     * Verhindert ungültige Eingaben wie Buchstaben oder Sonderzeichen.
+     * @param min Mindestwert (z. B. 1 für das Menü)
+     * @param max Maximalwert (z. B. 6 für das Menü)
+     * @return Eine gültige Zahl im Bereich [min, max].
+     */
+    private int getUserChoice(int min, int max) {
+        while (true) {
+            System.out.print("Bitte eine Zahl von " + min + " bis " + max + " eingeben: ");
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Verhindert Scanner-Probleme
+
+                if (choice >= min && choice <= max) {
+                    return choice;
+                } else {
+                    System.out.println("⚠️  Ungültige Eingabe! Bitte eine Zahl von " + min + " bis " + max + " eingeben.");
+                }
+            } else {
+                System.out.println("⚠️  Ungültige Eingabe! Nur Zahlen von " + min + " bis " + max + " sind erlaubt.");
+                scanner.next(); // Entfernt die falsche Eingabe
+            }
+        }
+    }
+
+    /**
+     * Ermöglicht dem Kunden, ein Produkt zum Warenkorb hinzuzufügen.
      */
     private void addProduct() {
         Display display = new Display();
-        display.displayProducts(); // Zeigt verfügbare Produkte an
+        display.displayProducts();
         System.out.print("Produkt-ID: ");
-        Product product = display.selectProduct(); // Wählt ein Produkt basierend auf der ID aus
-        cart.addProduct(product); // Fügt das ausgewählte Produkt zum Warenkorb hinzu
+        Product product = display.selectProduct();
+        cart.addProduct(product);
     }
 
     /**
-     * Ruft die Produktliste auf und erlaubt dem Kunden, ein Produkt aus dem Warenkorb zu entfernen.
+     * Ermöglicht dem Kunden, ein Produkt aus dem Warenkorb zu entfernen.
      */
     private void removeProduct() {
         Display display = new Display();
-        display.displayProducts(); // Zeigt verfügbare Produkte an
+        display.displayProducts();
         System.out.print("Produkt-ID: ");
-        Product product = display.selectProduct(); // Wählt ein Produkt basierend auf der ID aus
-        cart.removeProduct(product); // Entfernt das Produkt aus dem Warenkorb
+        Product product = display.selectProduct();
+        cart.removeProduct(product);
     }
 
     /**
-     * Führt den Bezahlvorgang für den aktuellen Warenkorb durch.
-     * Der Kunde gibt den gezahlten Betrag ein, und das Wechselgeld wird berechnet.
-     * Anschließend wird die Transaktion gespeichert und der Warenkorb geleert.
+     * Führt den Bezahlvorgang durch und speichert die Transaktion.
      */
     private void handlePayment() {
         double totalAmount = cart.getTotal();
         System.out.printf("\nGesamtbetrag: %.2f €\n", totalAmount);
         System.out.print("Gezahlter Betrag: ");
-        double receivedAmount = scanner.nextDouble(); // Eingabe des gezahlten Betrags durch den Kunden
-        System.out.printf("Wechselgeld: %.2f €\n", receivedAmount - totalAmount); // Berechnung des Wechselgelds
-        transactionManager.saveTransaction(cart); // Speichert die Transaktion in der JSON-Datei
-        cart.clearList(); // Leert den Warenkorb nach der Zahlung
+        double receivedAmount = scanner.nextDouble();
+        System.out.printf("Wechselgeld: %.2f €\n", receivedAmount - totalAmount);
+        transactionManager.saveTransaction(cart);
+        cart.clearList();
     }
 }

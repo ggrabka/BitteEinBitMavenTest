@@ -5,46 +5,53 @@ import java.util.Scanner;
 
 /**
  * Die `Display`-Klasse ist für die Anzeige der verfügbaren Produkte und die Produktauswahl verantwortlich.
- * Sie greift auf die `Heslper`-Klasse zu, um die Produkte aus der JSON-Datei zu laden.
+ * Sie greift auf die `Helper`-Klasse zu, um die Produkte aus der JSON-Datei zu laden.
  */
 public class Display {
-    private final Helper helper = new Helper(); // Instanz der Helper-Klasse für den Zugriff auf gespeicherte Produkte
+    private final Helper helper = new Helper();
 
     /**
      * Zeigt alle gespeicherten Produkte aus der JSON-Datei an.
-     * Falls keine Produkte vorhanden sind, wird eine entsprechende Nachricht ausgegeben.
      */
     public void displayProducts() {
-        helper.readFromJsonFile(); // Lädt Produkte aus der Datei in die Liste
-        List<Product> products = helper.getProducts(); // Ruft die aktuelle Produktliste ab
+        helper.readFromJsonFile();
+        List<Product> products = helper.getProducts();
 
         if (products.isEmpty()) {
             System.out.println("Keine Produkte verfügbar.");
         } else {
-            products.forEach(p -> System.out.println(p.getProductId() + ": " + p.getName())); // Gibt jedes Produkt aus
+            products.forEach(p -> System.out.println(p.getProductId() + ": " + p.getName()));
         }
     }
 
     /**
      * Erlaubt dem Benutzer, ein Produkt anhand der Produkt-ID auszuwählen.
-     * Falls eine falsche ID eingegeben wird, wird erneut nach einer Eingabe gefragt.
+     * Falls eine ungültige ID eingegeben wird, erscheint eine Fehlermeldung.
      * @return Das ausgewählte Produkt.
      */
     public Product selectProduct() {
         Scanner scanner = new Scanner(System.in);
-        List<Product> products = helper.getProducts(); // Ruft die aktuelle Produktliste ab
+        List<Product> products = helper.getProducts();
+        int minProductId = 1;
+        int maxProductId = products.size();
 
         while (true) {
-            try {
-                int id = Integer.parseInt(scanner.nextLine()); // Liest die Benutzer-Eingabe (Produkt-ID)
-                for (Product product : products) {
-                    if (product.getProductId() == id) {
-                        return product; // Gibt das Produkt zurück, falls die ID gefunden wurde
+            System.out.print("Bitte die Produkt-ID eingeben (1-" + maxProductId + "): ");
+            if (scanner.hasNextInt()) {
+                int id = scanner.nextInt();
+                scanner.nextLine();
+
+                if (id >= minProductId && id <= maxProductId) {
+                    for (Product product : products) {
+                        if (product.getProductId() == id) {
+                            return product;
+                        }
                     }
                 }
-                System.out.println("Produkt nicht gefunden. Erneut eingeben:");
-            } catch (NumberFormatException e) {
-                System.out.println("Ungültige Eingabe. Bitte eine Zahl eingeben."); // Falls keine Zahl eingegeben wurde
+                System.out.println("⚠️  Ungültige Eingabe! Bitte eine Zahl zwischen 1 und " + maxProductId + " eingeben.");
+            } else {
+                System.out.println("⚠️  Ungültige Eingabe! Bitte eine gültige Produkt-ID eingeben.");
+                scanner.next();
             }
         }
     }
