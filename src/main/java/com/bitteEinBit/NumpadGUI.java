@@ -71,7 +71,7 @@ public class NumpadGUI extends Application {
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
 
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
 
         // cell size according to stage size
@@ -243,7 +243,7 @@ public class NumpadGUI extends Application {
 
         Scene summaryScene = new Scene(summaryPane, 800, 600);
         stage.setScene(summaryScene);
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
 
         // Schedule text appearance with 3-second intervals
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);

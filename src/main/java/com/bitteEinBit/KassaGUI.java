@@ -96,7 +96,7 @@ public class KassaGUI extends Application {
         primaryStage.setScene(scene);
 
         //TODO UNCOMMENT
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
 
         // cell size according to stage size
