@@ -101,10 +101,15 @@ public class CashRegisterScreen {
      * Es wird sichergestellt, dass nur numerische Eingaben erfolgen.
      */
     private void handlePayment() {
+        if (cart.getTotal() == 0) { // **🔥 Bezahlvorgang ist nicht mit leerem Warenkorb möglich**
+            System.out.println("⚠️  Fehler: Der Warenkorb ist leer! Bitte fügen Sie Produkte hinzu, bevor Sie bezahlen.");
+            return;
+        }
+
         double totalAmount = cart.getTotal(); // Gesamtsumme berechnen
         System.out.printf("\n🛒 Gesamtbetrag: %.2f €\n", totalAmount);
 
-        double receivedAmount = getValidPayment(totalAmount); // 🔥 Verbesserte Methode für Eingabevalidierung
+        double receivedAmount = getValidPayment(totalAmount); //  Methode für Eingabevalidierung
 
         double change = receivedAmount - totalAmount; // Wechselgeld berechnen
         System.out.printf("💶 Wechselgeld: %.2f €\n", change);
@@ -116,6 +121,7 @@ public class CashRegisterScreen {
     /**
      * Überprüft die Eingabe des Bezahlbetrags.
      * Es sind nur Zahlen erlaubt, und der Betrag muss mindestens die Gesamtsumme sein.
+     * Maximal 2 Nachkommastellen sind erlaubt.
      * @param minAmount Der minimale Betrag (Gesamtsumme des Warenkorbs).
      * @return Ein gültiger Betrag, der mindestens `minAmount` beträgt.
      */
@@ -124,18 +130,18 @@ public class CashRegisterScreen {
             System.out.print("💰 Bitte den gezahlten Betrag eingeben: ");
             String input = scanner.next(); // Eingabe als String einlesen
 
-            // **Überprüft, ob die Eingabe nur Zahlen und maximal ein Komma oder Punkt enthält**
+            // **Überprüft, ob die Eingabe nur Zahlen mit maximal 2 Nachkommastellen enthält**
             if (input.matches("\\d+(\\.\\d{1,2})?|\\d+(,\\d{1,2})?")) {
                 input = input.replace(",", "."); // Falls ein Komma benutzt wurde, in einen Punkt umwandeln
                 double amount = Double.parseDouble(input);
 
-                if (amount >= minAmount) { // 🔥 Betrag muss mindestens die Gesamtsumme sein!
-                    return amount; // Gültige Eingabe zurückgeben
-                } else {
+                if (amount < minAmount) { // 🔥 Betrag muss mindestens die Gesamtsumme sein!
                     System.out.printf("⚠️  Fehler: Der eingegebene Betrag (%.2f €) ist zu niedrig. Bitte mindestens %.2f € eingeben.\n", amount, minAmount);
+                } else {
+                    return amount; // Gültige Eingabe zurückgeben
                 }
             } else {
-                System.out.println("⚠️  Fehler: Ungültige Eingabe! Bitte nur Zahlen (z. B. 10.50 oder 10,50) eingeben.");
+                System.out.println("⚠️  Fehler: Ungültige Eingabe! Bitte nur Zahlen mit maximal 2 Nachkommastellen eingeben (z. B. 10.50 oder 10,50).");
             }
         }
     }
