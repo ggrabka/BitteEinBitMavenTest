@@ -1,6 +1,6 @@
-//TODO CKECK PACKAGE NAME
 package com.bitteEinBit;
 
+//JavaFX
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
@@ -9,6 +9,12 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+
+//keystrokes
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 public class KassaGUI extends Application {
 
@@ -53,8 +59,8 @@ public class KassaGUI extends Application {
                 {"12", "Product 12", "1,00 €"},
 
                 //basic functions
-                {"plus", "+", "+"},
-                {"minus", "-", "-"},
+                {"PLUS", "+", "+"},
+                {"MINUS", "-", "-"},
 
                 //TODO READ FROM JSON
                 //id, name, price
@@ -159,22 +165,106 @@ public class KassaGUI extends Application {
     }
 
     private void handleProductClick(String id, String product, String price) {
-        System.out.println("------------------------------");
-        System.out.println("product chosen");
-        System.out.println("product id: " + id);
-        System.out.println("product name: " + product);
-        System.out.println("price:"+ price);
-        //TODO CALL METHOD
+//        System.out.println("------------------------------");
+//        System.out.println("product chosen");
+//        System.out.println("product id: " + id);
+//        System.out.println("product name: " + product);
+//        System.out.println("price:"+ price);
+        simulateKeyPress(id);
     }
 
     private void handleBasicFunctionClick(String label) {
-        System.out.println("------------------------------");
-        System.out.println("basic function chosen");
-        System.out.println("basic function: "+label);
-        //TODO CALL METHOD
+//        System.out.println("------------------------------");
+//        System.out.println("basic function chosen");
+//        System.out.println("basic function: "+label);
+        simulateKeyPress(label);
     }
 
-
+    private void simulateKeyPress(String key) {
+        try {
+            Robot robot = new Robot();
+            switch (key) {
+                case "1":
+                    robot.keyPress(KeyEvent.VK_1);
+                    robot.keyRelease(KeyEvent.VK_1);
+                    break;
+                case "2":
+                    robot.keyPress(KeyEvent.VK_2);
+                    robot.keyRelease(KeyEvent.VK_2);
+                    break;
+                case "3":
+                    robot.keyPress(KeyEvent.VK_3);
+                    robot.keyRelease(KeyEvent.VK_3);
+                    break;
+                case "4":
+                    robot.keyPress(KeyEvent.VK_4);
+                    robot.keyRelease(KeyEvent.VK_4);
+                    break;
+                case "5":
+                    robot.keyPress(KeyEvent.VK_5);
+                    robot.keyRelease(KeyEvent.VK_5);
+                    break;
+                case "6":
+                    robot.keyPress(KeyEvent.VK_6);
+                    robot.keyRelease(KeyEvent.VK_6);
+                    break;
+                case "7":
+                    robot.keyPress(KeyEvent.VK_7);
+                    robot.keyRelease(KeyEvent.VK_7);
+                    break;
+                case "8":
+                    robot.keyPress(KeyEvent.VK_8);
+                    robot.keyRelease(KeyEvent.VK_8);
+                    break;
+                case "9":
+                    robot.keyPress(KeyEvent.VK_9);
+                    robot.keyRelease(KeyEvent.VK_9);
+                    break;
+                case "10":
+                    robot.keyPress(KeyEvent.VK_0);
+                    robot.keyRelease(KeyEvent.VK_0);
+                    break;
+                case "DEL":
+                    robot.keyPress(KeyEvent.VK_DELETE);
+                    robot.keyRelease(KeyEvent.VK_DELETE);
+                    break;
+                case "EXIT":
+                    robot.keyPress(KeyEvent.VK_ESCAPE);
+                    robot.keyRelease(KeyEvent.VK_ESCAPE);
+                    break;
+                case "left":
+                    robot.keyPress(KeyEvent.VK_LEFT);
+                    robot.keyRelease(KeyEvent.VK_LEFT);
+                    break;
+                case "right":
+                    robot.keyPress(KeyEvent.VK_RIGHT);
+                    robot.keyRelease(KeyEvent.VK_RIGHT);
+                    break;
+                case "PLUS":
+                    robot.keyPress(KeyEvent.VK_PLUS);
+                    robot.keyRelease(KeyEvent.VK_PLUS);
+                    break;
+                case "MINUS":
+                    robot.keyPress(KeyEvent.VK_MINUS);
+                    robot.keyRelease(KeyEvent.VK_MINUS);
+                    break;
+                case "MENU":
+                    robot.keyPress(KeyEvent.VK_M);
+                    robot.keyRelease(KeyEvent.VK_M);
+                    break;
+                case "PAY":
+                    robot.keyPress(KeyEvent.VK_P);
+                    robot.keyRelease(KeyEvent.VK_P);
+                    break;
+                default:
+                    robot.keyPress(KeyEvent.VK_PLUS);
+                    robot.keyRelease(KeyEvent.VK_PLUS);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         launch(args);

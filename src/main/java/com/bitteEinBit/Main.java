@@ -23,13 +23,21 @@ public class Main {
             new Product("Schokoladenmousse", 5.80, 12),
     };
 
+
+
+
     public static void main(String[] args) {
 
-        Application.launch(KassaGUI.class, args);
+        //JavaFX
+        Thread javafxThread = new Thread(() -> Application.launch(KassaGUI.class, args));
+        javafxThread.setDaemon(true); // thread will not prevent the JVM from exiting
+        javafxThread.start();
+        System.out.println("JavaFX application started in parallel.");
 
         CashRegisterScreen cashRegisterScreen = new CashRegisterScreen();
         cashRegisterScreen.startForCustomer();
         cashRegisterScreen.printTransactions();
+
         Display display = new Display();
 
         display.displayEntrySelection();
