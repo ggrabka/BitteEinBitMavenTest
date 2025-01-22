@@ -124,5 +124,222 @@
     ],
     "totalAmount": 1.5,
     "transactionTime": "2025-01-22T13:47:11.5424625"
+  },
+  {
+    "transactionId": 8,
+    "purchasedProducts": [
+      {
+        "productId": 5,
+        "name": "Caesar-Salat",
+        "productGroup": "Salat",
+        "price": 6.5,
+        "quantity": 1
+      },
+      {
+        "productId": 7,
+        "name": "Spaghetti Carbonara",
+        "productGroup": "Hauptgericht",
+        "price": 12.5,
+        "quantity": 1
+      },
+      {
+        "productId": 11,
+        "name": "Schokoladenmousse",
+        "productGroup": "Dessert",
+        "price": 5.0,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 24.0,
+    "transactionTime": "2025-01-22T14:13:20.968991"
+  },
+  {
+    "transactionId": 9,
+    "purchasedProducts": [
+      {
+        "productId": 3,
+        "name": "Tomatensuppe",
+        "productGroup": "Suppe",
+        "price": 4.5,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 4.5,
+    "transactionTime": "2025-01-22T14:15:42.485095"
+  },
+  {
+    "transactionId": 10,
+    "purchasedProducts": [
+      {
+        "productId": 5,
+        "name": "Caesar-Salat",
+        "productGroup": "Salat",
+        "price": 6.5,
+        "quantity": 1
+      },
+      {
+        "productId": 7,
+        "name": "Spaghetti Carbonara",
+        "productGroup": "Hauptgericht",
+        "price": 12.5,
+        "quantity": 1
+      },
+      {
+        "productId": 9,
+        "name": "Apfelstrudel mit Vanillesoße",
+        "productGroup": "Dessert",
+        "price": 5.5,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 24.5,
+    "transactionTime": "2025-01-22T14:16:11.906914"
+  },
+  {
+    "transactionId": 11,
+    "purchasedProducts": [
+      {
+        "productId": 7,
+        "name": "Spaghetti Carbonara",
+        "productGroup": "Hauptgericht",
+        "price": 12.5,
+        "quantity": 1
+      },
+      {
+        "productId": 5,
+        "name": "Caesar-Salat",
+        "productGroup": "Salat",
+        "price": 6.5,
+        "quantity": 1
+      },
+      {
+        "productId": 10,
+        "name": "Tiramisu",
+        "productGroup": "Dessert",
+        "price": 6.0,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 25.0,
+    "transactionTime": "2025-01-22T14:20:42.749529"
+  },
+  {
+    "transactionId": 12,
+    "purchasedProducts": [
+      {
+        "productId": 6,
+        "name": "Wiener Schnitzel mit Pommes",
+        "productGroup": "Hauptgericht",
+        "price": 14.0,
+        "quantity": 1
+      },
+      {
+        "productId": 8,
+        "name": "Vegetarisches Curry",
+        "productGroup": "Hauptgericht",
+        "price": 11.0,
+        "quantity": 1
+      },
+      {
+        "productId": 5,
+        "name": "Caesar-Salat",
+        "productGroup": "Salat",
+        "price": 6.5,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 31.5,
+    "transactionTime": "2025-01-22T14:35:49.886701"
+  },
+  {
+    "transactionId": 13,
+    "purchasedProducts": [
+      {
+        "productId": 4,
+        "name": "Bruschetta",
+        "productGroup": "Gebäck",
+        "price": 5.0,
+        "quantity": 1
+      },
+      {
+        "productId": 7,
+        "name": "Spaghetti Carbonara",
+        "productGroup": "Hauptgericht",
+        "price": 12.5,
+        "quantity": 1
+      },
+      {
+        "productId": 8,
+        "name": "Vegetarisches Curry",
+        "productGroup": "Hauptgericht",
+        "price": 11.0,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 28.5,
+    "transactionTime": "2025-01-22T14:36:25.825145"
+  },
+  {
+    "transactionId": 14,
+    "purchasedProducts": [
+      {
+        "productId": 8,
+        "name": "Vegetarisches Curry",
+        "productGroup": "Hauptgericht",
+        "price": 11.0,
+        "quantity": 2
+      },
+      {
+        "productId": 4,
+        "name": "Bruschetta",
+        "productGroup": "Gebäck",
+        "price": 5.0,
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 27.0,
+    "transactionTime": "2025-01-22T14:37:00.899051"
+  },
+  {
+    "transactionId": 15,
+    "purchasedProducts": [
+      {
+        "productId": 4,
+        "name": "Bruschetta",
+        "productGroup": "Gebäck",
+        "price": 5.0,
+        "quantity": 1
+      },
+      {
+        "productId": 3,
+        "name": "Tomatensuppe",
+        "productGroup": "Suppe",
+        "price": 4.5,
+        "quantity": 4
+      },
+      {
+        "productId": 6,
+        "name": "Wiener Schnitzel mit Pommes",
+        "productGroup": "Hauptgericht",
+        "price": 14.0,
+        "quantity": 1
+      },
+      {
+        "productId": 9,
+        "name": "Apfelstrudel mit Vanillesoße",
+        "productGroup": "Dessert",
+        "price": 5.5,
+        "quantity": 1
+      },
+      {
+        "productId": 1,
+        "name": "Mineralwasser (0,5l)",
+        "productGroup": "Getränk",
+        "price": 3.5,
+        "quantity": 2
+      }
+    ],
+    "totalAmount": 49.5,
+    "transactionTime": "2025-01-22T14:37:58.166357"
   }
 ]
