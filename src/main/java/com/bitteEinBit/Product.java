@@ -1,126 +1,77 @@
 package com.bitteEinBit;
 
-import java.util.List;
 import java.util.Objects;
 
+/**
+ * Die `Product`-Klasse stellt ein Produkt dar, das in der Registrierkasse verwendet wird.
+ * Jedes Produkt hat eine eindeutige ID, einen Namen, eine Produktgruppe, einen Preis und eine Menge.
+ */
 public class Product {
-    private int productId;
-    private double price;
-    private String productGroup;
-    private String name;
-    private int quantity;
+    private int productId;       // Eindeutige ID des Produkts
+    private String name;         // Name des Produkts
+    private String productGroup; // Kategorie des Produkts (z. B. Getränke, Essen)
+    private double price;        // Preis des Produkts
+    private int quantity = 0;    // Anzahl des Produkts im Warenkorb (Standard: 0)
 
-    private List<Product> products;
-
-    public Product(double price, String productGroup, String name) {
-        this.price = price;
+    /**
+     * Konstruktor zur Erstellung eines neuen Produkts mit einer ID, einem Namen, einer Gruppe und einem Preis.
+     * @param productId Eindeutige Identifikationsnummer des Produkts
+     * @param name Name des Produkts
+     * @param productGroup Kategorie oder Art des Produkts
+     * @param price Preis des Produkts in Euro
+     */
+    public Product(int productId, String name, String productGroup, double price) {
+        this.productId = productId;
+        this.name = name;
         this.productGroup = productGroup;
-        this.name = name;
-    }
-
-    public Product(String name, double price, int id) {
-
-        this.name = name;
-        this.price = price;
-        this.productId = id;
-        this.quantity = 0;
-    }
-
-    public Product(List<Product> products) {
-
-        this.products = products;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public String getProductGroup() {
-        return productGroup;
-    }
-
-    public int getQuantity() {
-
-        return quantity;
-    }
-
-    public void increaseQuantity() {
-
-        this.quantity++;
-    }
-
-    public void decreaseQuantity() {
-
-        if (this.quantity > 0) {
-
-            this.quantity--;
-        }
-    }
-
-    public void printProduct() {
-
-        System.out.printf(" >> %s %.2f €\n (Im Warenkorb: %d)\n", this.name, this.price, this.quantity);
-    }
-
-    public void displayProducts() {
-
-        for (Product product : products) {
-
-            System.out.println(product);
-        }
-    }
-
-    void setProductId(int productId) {this.productId = productId;}
-
-    void setName(String name) {
-        this.name = name;
-    }
-
-    void setProductGroup(String productGroup) {
-        this.productGroup = productGroup;
-    }
-
-    void setPrice(double price) {
         this.price = price;
     }
 
-    public void addProduct() {
-        Helper helper = new Helper();
-        helper.readFromJsonFile();
-        helper.checkIfProductExistsInJsonFile(this);
-        helper.addProductToJsonFile(this);
-    }
+    // Getter-Methoden für die Eigenschaften des Produkts
+    public int getProductId() { return productId; }
+    public String getName() { return name; }
+    public String getProductGroup() { return productGroup; }
+    public double getPrice() { return price; }
+    public int getQuantity() { return quantity; }
 
-    public void removeProduct() {
-        Helper helper = new Helper();
-        helper.readFromJsonFile();
-        helper.removeProductFromJsonFile(this);
-    }
+    /**
+     * Erhöht die Anzahl des Produkts im Warenkorb um 1.
+     */
+    public void increaseQuantity() { quantity++; }
 
+    /**
+     * Verringert die Anzahl des Produkts um 1, jedoch nicht unter 0.
+     */
+    public void decreaseQuantity() { if (quantity > 0) quantity--; }
+
+    /**
+     * Erstellt eine formatierte Zeichenkette mit allen Produktdetails.
+     * @return formatierter String mit Produktinformationen.
+     */
     @Override
     public String toString() {
-        //return "{productId=" + productId + ", productGroup=" + productGroup + ", name=" + name + ", price=" + price + "}";
-        return String.format(" // %s %.2f € Nr. %d", this.name, this.price, this.productId, this.productGroup);
+        return String.format("%s (%s): %.2f € [x%d]", name, productGroup, price, quantity);
     }
 
+    /**
+     * Vergleicht zwei Produkte anhand ihrer ID, um Duplikate zu verhindern.
+     * @param o Das zu vergleichende Objekt.
+     * @return `true`, wenn beide Produkte dieselbe ID haben, sonst `false`.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Double.compare(price, product.price) == 0 && Objects.equals(productGroup, product.productGroup) && Objects.equals(name, product.name);
+        return productId == product.productId;
     }
 
+    /**
+     * Erstellt einen eindeutigen Hashcode basierend auf der Produkt-ID.
+     * @return Hashcode des Produkts.
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(price, productGroup, name);
+        return Objects.hash(productId);
     }
 }
