@@ -37,6 +37,22 @@ public class Helper {
         }
     }
 
+    List<Product> createProductList() {
+        try {
+            FileReader reader = new FileReader(PRODUCTS_JSON);
+            Type type = new TypeToken<ArrayList<Product>>() {}.getType();
+            products = gson.fromJson(reader, type);
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Error in creating a FileReader object.");
+        } catch (IOException e) {
+            System.err.println("Error in closing the file.");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
     void checkIfProductExistsInJsonFile(Product product) {
         Scanner scanner = new Scanner(System.in);
         for (Product currentProduct : products) {

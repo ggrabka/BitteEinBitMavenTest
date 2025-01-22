@@ -1,5 +1,6 @@
 package com.bitteEinBit;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Product {
@@ -9,7 +10,7 @@ public class Product {
     private String name;
     private int quantity;
 
-    private Product[] products;
+    private List<Product> products;
 
     public Product(double price, String productGroup, String name) {
         this.price = price;
@@ -25,7 +26,7 @@ public class Product {
         this.quantity = 0;
     }
 
-    public Product(Product[] products) {
+    public Product(List<Product> products) {
 
         this.products = products;
     }
@@ -106,8 +107,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "{productId=" + productId + ", productGroup=" + productGroup + ", name=" + name + ", price=" + price + "}";
-        //return String.format(" // %s %.2f € Nr. %d", this.name, this.price, this.id);
+        //return "{productId=" + productId + ", productGroup=" + productGroup + ", name=" + name + ", price=" + price + "}";
+        return String.format(" // %s %.2f € Nr. %d", this.name, this.price, this.productId, this.productGroup);
     }
 
     @Override

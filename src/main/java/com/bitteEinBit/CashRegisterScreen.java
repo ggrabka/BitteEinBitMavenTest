@@ -1,17 +1,20 @@
 package com.bitteEinBit;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CashRegisterScreen {
 
     Scanner button = new Scanner(System.in);
+    Helper helper = new Helper();
+    List<Product> productList = helper.createProductList();
 
     private int nextCartId = 1;
     private Cart cart = new Cart(0);
     private final ArrayList<Cart> completedCarts;
 
-    Product products = new Product(Main.products);
+    Product products = new Product(productList);
     Product product = null;
 
     public CashRegisterScreen() {
@@ -262,7 +265,7 @@ public class CashRegisterScreen {
 
     public Product findProductById(int id) {
 
-        for (Product product : Main.products) {
+        for (Product product : productList) {
 
             if (product.getProductId() == id) {
 
@@ -275,7 +278,7 @@ public class CashRegisterScreen {
 
     public boolean checkId(int number) {
 
-        for (Product product : Main.products) {
+        for (Product product : productList) {
 
             if (product.getProductId() == number) {
 

@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6cf1389-5b4a-4303-8f02-fd693607448e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/CashRegisterScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Display.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Helper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/products.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/CashRegisterScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/CashRegisterScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Product.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +20,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2ryjs2IQjxr6RKBsFECCWPzoCCC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -37,16 +31,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/gab/IdeaProjects/BitteEinBitMaven/src/main/java/com/bitteEinBit"
+    "last_opened_file_path": "C:/Users/gab/IdeaProjects/BitteEinBitMaven"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gab\IdeaProjects\BitteEinBitMaven" />
       <recent name="C:\Users\gab\IdeaProjects\BitteEinBitMaven\src\main\java\com\bitteEinBit" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -63,5 +58,26 @@
       <updated>1737538415355</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bitteEinBit/CashRegisterScreen.java</url>
+          <line>10</line>
+          <properties field="productList" class="com.bitteEinBit.CashRegisterScreen" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bitteEinBit/Helper.java</url>
+          <line>39</line>
+          <properties class="com.bitteEinBit.Helper" method="createProductList">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

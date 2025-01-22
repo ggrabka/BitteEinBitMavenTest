@@ -1,0 +1,68 @@
+[
+  {
+    "productId": 1,
+    "price": 3.5,
+    "productGroup": "Getränk",
+    "name": "Mineralwasser (0,5l)"
+  },
+  {
+    "productId": 2,
+    "price": 3.0,
+    "productGroup": "Getränk",
+    "name": "Kaffee"
+  },
+  {
+    "productId": 3,
+    "price": 4.50,
+    "productGroup": "Suppe",
+    "name": "Tomatensuppe"
+  },
+  {
+    "productId": 4,
+    "price": 5.0,
+    "productGroup": "Gebäck",
+    "name": "Bruschetta"
+  },
+  {
+    "productId": 5,
+    "price": 6.50,
+    "productGroup": "Salat",
+    "name": "Caesar-Salat"
+  },
+  {
+    "productId": 6,
+    "price": 14.0,
+    "productGroup": "Hauptgericht",
+    "name": "Wiener Schnitzel mit Pommes"
+  },
+  {
+    "productId": 7,
+    "price": 12.50,
+    "productGroup": "Hauptgericht",
+    "name": "Spaghetti Carbonara"
+  },
+  {
+    "productId": 8,
+    "price": 11.0,
+    "productGroup": "Hauptgericht",
+    "name": "Vegetarisches Curry"
+  },
+  {
+    "productId": 9,
+    "price": 5.50,
+    "productGroup": "Dessert",
+    "name": "Apfelstrudel mit Vanillesoße"
+  },
+  {
+    "productId": 10,
+    "price": 6.0,
+    "productGroup": "Dessert",
+    "name": "Tiramisu"
+  },
+  {
+    "productId": 11,
+    "price": 5.0,
+    "productGroup": "Dessert",
+    "name": "Schokoladenmousse"
+  }
+]
