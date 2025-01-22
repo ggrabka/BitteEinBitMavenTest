@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6cf1389-5b4a-4303-8f02-fd693607448e" name="Changes" comment="GUI added, semi-functional (see TODOs in KassaGUI.java)">
+    <list default="true" id="e6cf1389-5b4a-4303-8f02-fd693607448e" name="Changes" comment="added semi-functional keystrokes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/NumpadGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/KassaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/KassaGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bitteEinBit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +83,9 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/bitteEinBit" />
       <recent name="C:\Users\gab\IdeaProjects\BitteEinBitMaven\src\main\java\com\bitteEinBit" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bitteEinBit" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -139,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737540519360</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added semi-functional keystrokes">
+      <option name="closed" value="true" />
+      <created>1737552868517</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737552868517</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +193,36 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="GUI added, semi-functional (see TODOs in KassaGUI.java)" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI added, semi-functional (see TODOs in KassaGUI.java)" />
+    <MESSAGE value="added semi-functional keystrokes" />
+    <option name="LAST_COMMIT_MESSAGE" value="added semi-functional keystrokes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bitteEinBit/NumpadGUI.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bitteEinBit/NumpadGUI.java</url>
+          <line>19</line>
+          <properties class="com.bitteEinBit.NumpadGUI" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bitteEinBit/NumpadGUI.java</url>
+          <line>80</line>
+          <properties class="com.bitteEinBit.NumpadGUI" method="createCell">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

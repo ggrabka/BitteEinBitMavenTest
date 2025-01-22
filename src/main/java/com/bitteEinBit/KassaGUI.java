@@ -9,7 +9,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
 //keystrokes
@@ -26,14 +25,15 @@ public class KassaGUI extends Application {
     public void start(Stage primaryStage) {
         GridPane gridPane = new GridPane();
         gridPane.setStyle("-fx-background-color: black; -fx-border-color: black; -fx-border-width: 5px;");
+        gridPane.setAlignment(Pos.CENTER); // Center the gridPane
 
         String[][] products = {
                 //TODO READ FROM JSON
                 //id, name, price
                 {"1", "Product 1", "1,00 €"},
-                {"2", "Product 2", "1,00 €"},
-                {"3", "Product 3", "1,00 €"},
-                {"4", "Product 4", "1,00 €"},
+                {"2", "Product 2", "2,00 €"},
+                {"3", "Product 3", "3,00 €"},
+                {"4", "Product 4", "4,00 €"},
 
                 //basic functions
 
@@ -42,10 +42,10 @@ public class KassaGUI extends Application {
 
                 //TODO READ FROM JSON
                 //id, name, price
-                {"5", "Product 5", "1,00 €"},
-                {"6", "Product 6", "1,00 €"},
-                {"7", "Product 7", "1,00 €"},
-                {"8", "Product 8", "1,00 €"},
+                {"5", "Product 5", "5,00 €"},
+                {"6", "Product 6", "6,00 €"},
+                {"7", "Product 7", "7,00 €"},
+                {"8", "Product 8", "8,00 €"},
 
                 //basic functions
                 {"left", "←", "←"},
@@ -53,10 +53,10 @@ public class KassaGUI extends Application {
 
                 //TODO READ FROM JSON
                 //id, name, price
-                {"9", "Product 9", "1,00 €"},
-                {"10", "Product 10", "1,00 €"},
-                {"11", "Product 11", "1,00 €"},
-                {"12", "Product 12", "1,00 €"},
+                {"9", "Product 9", "9,00 €"},
+                {"10", "Product 10", "10,00 €"},
+                {"11", "Product 11", "11,00 €"},
+                {"12", "Product 12", "12,00 €"},
 
                 //basic functions
                 {"PLUS", "+", "+"},
@@ -64,10 +64,10 @@ public class KassaGUI extends Application {
 
                 //TODO READ FROM JSON
                 //id, name, price
-                {"13", "Product 13", "1,00 €"},
-                {"14", "Product 14", "1,00 €"},
-                {"15", "Product 15", "1,00 €"},
-                {"16", "Product 16", "1,00 €"},
+                {"13", "Product 13", "13,00 €"},
+                {"14", "Product 14", "14,00 €"},
+                {"15", "Product 15", "15,00 €"},
+                {"16", "Product 16", "16,00 €"},
 
                 //basic functions
                 {"MENU", "MENU", "MENU"},
@@ -96,7 +96,7 @@ public class KassaGUI extends Application {
         primaryStage.setScene(scene);
 
         //TODO UNCOMMENT
-        //primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
 
         // cell size according to stage size
@@ -167,17 +167,32 @@ public class KassaGUI extends Application {
     private void handleProductClick(String id, String product, String price) {
 //        System.out.println("------------------------------");
 //        System.out.println("product chosen");
-//        System.out.println("product id: " + id);
+        System.out.println(id);
 //        System.out.println("product name: " + product);
 //        System.out.println("price:"+ price);
-        simulateKeyPress(id);
+//        simulateKeyPress(id);
     }
 
     private void handleBasicFunctionClick(String label) {
 //        System.out.println("------------------------------");
 //        System.out.println("basic function chosen");
-//        System.out.println("basic function: "+label);
-        simulateKeyPress(label);
+        System.out.println(label);
+        if ("PAY".equals(label)) {
+            openNewWindow();
+        }
+        else {
+            simulateKeyPress(label);
+        }
+    }
+
+    private void openNewWindow() {
+        Stage newStage = new Stage();
+        NumpadGUI NumpadGUI = new NumpadGUI();
+        try {
+            NumpadGUI.start(newStage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void simulateKeyPress(String key) {
@@ -257,8 +272,6 @@ public class KassaGUI extends Application {
                     robot.keyRelease(KeyEvent.VK_P);
                     break;
                 default:
-                    robot.keyPress(KeyEvent.VK_PLUS);
-                    robot.keyRelease(KeyEvent.VK_PLUS);
                     break;
             }
         } catch (Exception e) {
@@ -266,7 +279,7 @@ public class KassaGUI extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
 }
